@@ -4,15 +4,6 @@ A small, dependency-free Python utility that lets you evaluate a folder of
 selfies (genuine or deepfake) against **both** SpoofSense APIs and get a single,
 combined verdict per image in a CSV.
 
-For every image it:
-
-1. Calls the **PAD Liveness API** — `POST /v3/antispoofing`
-2. Calls the **Deepfake Detection API** — `POST /antispoofing`
-3. Marks the face **`real` only if BOTH APIs say `real`**, otherwise `spoof`.
-4. Computes one **output score** (`prob_real`):
-   - if exactly one API flags the face as `spoof*` → use **that API's** `prob_real`
-   - if both APIs agree (both `real`, or both `spoof*`) → use the **average** `prob_real`
-
 ## Requirements
 
 - Python 3.8+
@@ -47,8 +38,6 @@ or a blend. Nothing is assumed about the contents.
 | `-o, --output` | `spoofsense_eval_results.csv` | Output CSV path. |
 | `--liveness-key` | `$SPOOFSENSE_LIVENESS_KEY` | Sandbox key for the PAD Liveness endpoint. |
 | `--deepfake-key` | `$SPOOFSENSE_DEEPFAKE_KEY` | Sandbox key for the Deepfake Detection endpoint. |
-| `--liveness-url` | SpoofSense liveness URL | Full URL for the PAD Liveness endpoint (or `$SPOOFSENSE_LIVENESS_URL`). |
-| `--deepfake-url` | SpoofSense deepfake URL | Full URL for the Deepfake Detection endpoint (or `$SPOOFSENSE_DEEPFAKE_URL`). |
 | `-r, --recursive` | off | Recurse into subdirectories. |
 | `--workers` | `4` | Images processed concurrently. |
 | `--timeout` | `30` | Per-request timeout (seconds). |
